@@ -61,9 +61,7 @@ class App extends Component {
 
   /** Lifecyle methods  */
   componentDidUpdate() {
-    if (this.isGameOver()) {
-      this.transition('GAME_ENDED', this.state.players);
-    }
+    this.isGameOver() && this.transition('GAME_ENDED', this.state.players);
   }
 
   /** User Action Handlers **/
@@ -141,16 +139,16 @@ class App extends Component {
 
   fetchCards = () => {
     fetchPhotos(photos => {
-      if (photos.error) {
-        this.transition('FETCH_FAILED');
-      } else {
-        const cards = [...photos, ...photos];
-        shuffle(cards);
-        this.setState({
-          cards
-        });
-        this.transition('CARDS_FETCHED');
-      }
+      return photos.error
+        ? this.transition('FETCH_FAILED')
+        : (() => {
+            const cards = [...photos, ...photos];
+            shuffle(cards);
+            this.setState({
+              cards
+            });
+            this.transition('CARDS_FETCHED');
+          })();
     });
   };
 
