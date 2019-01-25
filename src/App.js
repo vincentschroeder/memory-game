@@ -25,7 +25,15 @@ class App extends Component {
 
   state = this.defaultState;
 
-  /** Finite State Machine */
+  /**
+   * Finite State Machine
+   *
+   * This object describes the main states the app can have and how to
+   * transition to the next state. You can find a visualisation in the
+   * startechart.png in the root. For simplicity I used strings here.
+   * Normally I would create constants for all states & actions.
+   *
+   */
   machine = {
     initial: 'selectingPlayers',
     states: {
@@ -45,6 +53,9 @@ class App extends Component {
     }
   };
 
+  /**
+   * These methods will be executed on entering a specific state
+   */
   commands = {
     selectingPlayers: () => this.addPlayer(),
     startingGame: () => this.startGame(),
@@ -53,6 +64,10 @@ class App extends Component {
     gameEnded: players => this.getWinners(players)
   };
 
+  /**
+   * The heart of the finite state machine. This manages the state transition
+   * and executes the corresponding commands defined above
+   */
   transition = (action, payload) => {
     const nextState = this.machine.states[this.state.currentState].on[action];
     const command = () => this.commands[nextState] && this.commands[nextState](payload);
