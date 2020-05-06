@@ -1,6 +1,6 @@
-# Coding Challenge EyeEmory
+# Memory Game with Finite State Machine
 
-## The rules
+## The Rules
 
 - all cards are face-down at the beginning
 - each turn consists of revealing to cards on the table
