@@ -1,5 +1,8 @@
 # Memory Game with Finite State Machine
 
+## Demo
+https://vincentschroeder.github.io/memory-game/
+
 ## The Rules
 
 - all cards are face-down at the beginning
